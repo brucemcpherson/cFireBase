@@ -1,5 +1,5 @@
 # Google Apps Script Project: cFireBase
-This repo (cFireBase) was automatically updated on 15 September 2015 09:58:38 BST by GasGit
+This repo (cFireBase) was automatically updated on 15 September 2015 11:49:52 BST by GasGit
 
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")
 ## Details for Apps Script project cFireBase
@@ -16,6 +16,8 @@ no libraries discovered
 ### All dependencies and sub dependencies
 no libraries discovered
 ### Enabled Google Services
-no libraries discovered
+*library*|*identifier*|*version*
+--- | --- | --- 
+Drive API| Drive|v2
 ###Need more detail ?
 You can see [full project info as json here](info.json)
