@@ -6,7 +6,7 @@ function getLibraryInfo () {
   return {
     info: {
       name:'cFireBase',
-      version:'0.0.1',
+      version:'0.0.2',
       key:'MBz9GwQn5jZOg-riXY3pBTCz3TLx7pV4j',
       share:'https://script.google.com/d/18qhPwatsNUfbJTHBQ1bmsZBKjQsPxj_hMC59zowprZCSFT1z0IrLcMu1/edit?usp=sharing',
       description:'firebase api'
@@ -23,21 +23,34 @@ function getLibraryInfo () {
  */
 var FireBase = function () {
 
-  var self = this, authData_;
+  var self = this, authData_,promiseMode_ = false;;
+  
+
   
   /**
    * set a goa handler 
-   * @param {object} authData the auth data
+   * @param {object||goa} authData the auth data
    * @return {Firebase} self
    */
   self.setAuthData = function (authData) {
+    
+    // can take a goa as well
     authData_ = authData;
-    if (!authData_ || !authData_.root || !authData_.key) {
-      throw 'need an auth object with a root and a key';
+    if (!authData_ || !self.getRoot() || !self.getKey() ) {
+      throw 'need an auth object with a root and a key or a goa object';
     }
     return self;
   };
   
+  /**
+   * set promise mode - in this mode promises are returned for fetches rather than resilts
+   * @param {boolean} promiseMode 
+   * @return {FireBase} self
+   */
+  self.setPromiseMode = function(promiseMode) {
+    promiseMode_ = promiseMode;
+    return self;
+  };
   /**
    * do a put (replaces data)
    * @param {string} putObject an object to put
@@ -114,7 +127,7 @@ var FireBase = function () {
    * @return {string} the path
    */
   function getPath_  (childPath) {
-    return authData_.root + ( childPath || '' ) + '.json';
+    return self.getRoot() + ( childPath || '' ) + '.json';
   }
 
   /**
@@ -136,7 +149,7 @@ var FireBase = function () {
    * do a fetch
    * @param {string} url the url
    * @param {object} [options={method:'GET'}] 
-   * @return
+   * @return {Promise}
    */
   function fetch_ (url, options) {
   
@@ -145,20 +158,55 @@ var FireBase = function () {
     if (!options.hasOwnProperty("muteHttpException")) {
       options.muteHttpExceptions = true;
     }
+    var result;
 
-    // do the fetch
-    var result = cUseful.Utils.expBackoff (function() {
-      return UrlFetchApp.fetch (url + "?auth=" + authData_.key, options);
-    });
+    return promiseMode_ ? 
+      new Promise (function (resolve, reject) {
+        try {
+          result = doRequest();
+          resolve (makeResult());
+        } 
+        catch(err) {
+          reject(err);
+        }
+      }) : makeAndDo();
     
-    return {
-      ok: result.getResponseCode() === 200,
-      data: result.getResponseCode() === 200 ? JSON.parse(result.getContentText()) : null,
-      response:result,
-      path:url
+    function makeAndDo () {
+      result = doRequest();
+      return makeResult();
     }
+    
+    function doRequest () {
+      return cUseful.Utils.expBackoff (function() {
+        return UrlFetchApp.fetch (url + "?auth=" + self.getKey(), options);
+      });
+    }
+    
+    function makeResult () {
+      return {
+        ok: result.getResponseCode() === 200,
+        data: result.getResponseCode() === 200 ? JSON.parse(result.getContentText()) : null,
+        response:result,
+        path:url
+      };
+    }
+
 
   };
  
+  // deteemine whether we have a goa or a customm object
+  function isGoa_ (authData) {
+    return typeof authData.getToken === "function" && typeof authData.getProperty === "function";
+  }
+  
+  // get the key
+  self.getKey = function () {
+    return isGoa_ (authData_ ) ? authData_.getToken() : authData_.key;
+  };
+  
+  // get the database root
+  self.getRoot = function () {
+    return isGoa_ (authData_ ) ? authData_.getProperty("root") : authData_.root;
+  };
   return self;
 };
