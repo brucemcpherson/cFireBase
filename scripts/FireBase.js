@@ -6,7 +6,7 @@ function getLibraryInfo () {
   return {
     info: {
       name:'cFireBase',
-      version:'0.0.2',
+      version:'0.0.3',
       key:'MBz9GwQn5jZOg-riXY3pBTCz3TLx7pV4j',
       share:'https://script.google.com/d/18qhPwatsNUfbJTHBQ1bmsZBKjQsPxj_hMC59zowprZCSFT1z0IrLcMu1/edit?usp=sharing',
       description:'firebase api'
@@ -25,6 +25,28 @@ var FireBase = function () {
 
   var self = this, authData_,promiseMode_ = false;;
   
+
+  /**
+   * generate a JWT
+   * you can use this as an alternative to using cGoa
+   * it's up to you to manage your own secrets etc if not using cGoa
+   * @param {string} firebaseRoot the db root such as 'https://yourproject.firebaseio.com/'
+   * @param {object} firebaseRules your auth rules such as {uid:"bruce"}
+   * @param {string} firebaseSecret your secret key , such as aK....0h
+   * @return {Firebase} self
+   */
+  self.generateJWT  = function (firebaseRoot, firebaseRules , firebaseSecret) {
+    
+    var ft =  JWT.generateJWT ( firebaseRules , firebaseSecret );
+    if (!ft) {
+      throw 'unable to generate firebase jwt';
+    }
+    authData_ = {
+      key:ft,
+      root:firebaseRoot,
+    };
+    return self;
+  };
 
   
   /**
