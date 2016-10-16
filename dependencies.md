@@ -1,5 +1,5 @@
 # Google Apps Script Project: cFireBase
-This repo (cFireBase) was automatically updated on 27 July 2016 10:36:20 BST by GasGit
+This repo (cFireBase) was automatically updated on 16 October 2016 15:32:32 BST by GasGit
 
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")
 ## Details for Apps Script project cFireBase
@@ -11,6 +11,7 @@ The shared link for [cFireBase is here](https://script.google.com/d/18qhPwatsNUf
 --- | --- 
 FireBase| server_js
 polyfills| server_js
+JWT| server_js
 ### Directly referenced libraries
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
