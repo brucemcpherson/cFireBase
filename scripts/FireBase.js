@@ -6,7 +6,7 @@ function getLibraryInfo () {
   return {
     info: {
       name:'cFireBase',
-      version:'0.0.3',
+      version:'0.0.4',
       key:'MBz9GwQn5jZOg-riXY3pBTCz3TLx7pV4j',
       share:'https://script.google.com/d/18qhPwatsNUfbJTHBQ1bmsZBKjQsPxj_hMC59zowprZCSFT1z0IrLcMu1/edit?usp=sharing',
       description:'firebase api'
