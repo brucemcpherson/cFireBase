@@ -1,5 +1,5 @@
 # Google Apps Script Project: cFireBase
-This repo (cFireBase) was automatically updated on 16 October 2016 15:32:32 BST by GasGit
+This repo (cFireBase) was automatically updated on 18 October 2016 11:36:49 BST by GasGit
 
 For more information see the [desktop liberation site](http://ramblings.mcpher.com/Home/excelquirks/drivesdk/gettinggithubready "desktop liberation") or [contact me on G+](https://plus.google.com/+BruceMcpherson "Bruce McPherson - GDE")
 ## Details for Apps Script project cFireBase
@@ -15,11 +15,11 @@ JWT| server_js
 ### Directly referenced libraries
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|58|no|[here](libraries/cUseful "library source")
+cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|69|no|[here](libraries/cUseful "library source")
 ### All dependencies and sub dependencies
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|58|no|[here](libraries/cUseful "library source")
+cUseful| cUseful|Mcbr-v4SsYKJP7JMohttAZyz3TLx7pV4j|69|no|[here](libraries/cUseful "library source")
 ### Enabled Google Services
 no libraries discovered
 ###Need more detail ?
